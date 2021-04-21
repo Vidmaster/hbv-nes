@@ -43,12 +43,12 @@ An example of such a modification is removing a player's ability to lose lives u
 
 1) Identify the memory address that is used to store a player's remaining lives.
 2) Locate the subroutine that handles player death.
-3) Modify the `PlayerDeath` subroutine such that it does not decrement a player's remaining lives and continues with normal game execution.
+3) Modify this subroutine such that it does not decrement a player's remaining lives and continues with normal game execution.
 
 In the case of SMB, the life counter is stored at `RAM:75A` and is referenced by decrement in the subroutine that begins at `ROM:11DD`.
 
 ![player death subroutine](images/sub_playerdeath.png)
 
-The decrement instruction at `ROM:11E9` can be replaced by `NOP` instructions to prevent loss of life. The instruction that follows, at `ROM:11EC`, results in a branch to `ROM:11F9` if the negative flag is clear which, in this case, is true any time that the player has at least one life remaining. Because the negative flag is set at this point in the game's execution and not cleared by the preceeding NOP instructions, replacing the `BPL` with its inverse branch instruction, `BMI`, will ensure that the game continues to execute as though the player has lost a life and has lives remaining.
+The decrement instruction at `ROM:11E9` can be replaced by `NOP` instructions to prevent loss of life. The instruction that follows, at `ROM:11EC`, results in a branch to `ROM:11F9` if the negative flag is clear which, under normal conditions, is true any time that the player has lost a life and has at least one life remaining. Because the negative flag is set at this point in the game's execution and not cleared by the preceeding NOP instructions, replacing the `BPL` with its inverse branch instruction, `BMI`, will ensure that the game continues to execute as though the player has lost a life and has at least one life remaining.
 
 ![no death subroutine](images/sub_nodeath.png)
