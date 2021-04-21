@@ -1,4 +1,4 @@
-# hbv-nes
+# Team Risky Nitrogen: Semester Project
 NES reverse engineering project for Host Based Vulnerability Discovery at UNO
 
 ## Proposal
@@ -15,7 +15,7 @@ The history of ROM hacking, or the act of modifying a console game, is sadly not
 
 The NES console itself uses the [MOS Technology 6502](https://en.wikipedia.org/wiki/MOS_Technology_6502) processor, which was also used in the Atari 2600, Apple II, several other popular devices in the early 1980s, and even Futurama's Bender. Fans of the console have created [impressive documentation](https://fms.komkon.org/EMUL8/NES.html) of its hardware, and [numerous tutorials](https://wiki.nesdev.com/w/index.php/Programming_guide) and [ebooks on 6502 assembly language](https://en.wikibooks.org/wiki/6502_Assembly) can be found, including a [JavaScript assembler and emulator](https://skilldrick.github.io/easy6502/).
 
-![Source: https://www.etsy.com/listing/913975411/super-mario-bros-duck-hunt-original-nes](images/smb_dh_cart.jpg_)
+![Source: https://www.etsy.com/listing/913975411/super-mario-bros-duck-hunt-original-nes](images/smb_dh_cart.jpg)
 
 While the NES originally used its iconic cartridges, the data from these games is now most typically packaged in the format used by the iNES emulator from the mid-90s. This format contains a [16-byte header](https://fms.komkon.org/EMUL8/NES.html#LABC) followed by a binary representation of the game's ROM and VROM banks. The header serves to identify the number of 16kB ROM banks and 8kB VROM banks, as well as how the file contents should be mapped by an emulator. In SMB the header indicates 2 ROM banks and 1 VROM bank for a total game size of 40kB, or approximately a bajillion and a half times smaller than one of today's blockbusters.
 
@@ -72,3 +72,9 @@ The decrement instruction at `ROM:11E9` can be replaced by `NOP` instructions to
 * [Romhacking.net Community](http://romhacking.net)
 * [Super Mario Bros. Romhacking Wiki](https://datacrystal.romhacking.net/wiki/Super_Mario_Bros.)
 * [Gametech Emulation Wiki](https://emulation.gametechwiki.com/index.php/Main_Page)
+* [NESDev Forums](https://forums.nesdev.com/index.php)
+* [6502 Assembly](https://en.wikibooks.org/wiki/6502_Assembly)
+* [HackerNES YouTube Tutorial](https://www.youtube.com/watch?v=fZOUezXZS4U)
+* [John Riggs's YouTube Tutorials](https://www.youtube.com/playlist?list=PLsOTz-tlvayLmYmgreE4q1w0E6rN29T4p)
+* [MorphCat Games Micro Mages Video](https://www.youtube.com/watch?v=ZWQ0591PAxM)
+* [Tile Layer Pro](https://www.romhacking.net/utilities/108/)
