@@ -31,7 +31,7 @@ While the NES originally used its iconic cartridges, the data from these games i
 
 Fortunately, [FCEUX](http://fceux.com/web/home.html) can provide most of what is needed in this project, as it includes emulation, debugging, hex editing, and basic disassembly of ROM files, and runs on Windows, OS X, and *nix operating systems.
 
-### Graphics Editing
+## Graphics Editing
 
 Graphics editing is among the most trivial NES ROMHacking tasks. Graphical components of a game are defined in ROM as "tiles", which are 8x8 pixel grids that make up the game's background and sprites. At any one time, NES can render 512 tiles - 256 tiles reserved for each background and sprites.
 
@@ -45,15 +45,13 @@ The following shows the difference between an unmodified SMB ROM and one in whic
 
 ## Game Logic Editing
 
-Modifying the behavior of a game is a more difficult task that requires making modifications to subroutines in ROM.
-
-#TODO something about how annotated disassembly is invaluable for these modifications
+Modifying the behavior of a game is a more difficult task that requires making modifications to subroutines in ROM. This task can be incredibly tedious and require a great deal of trial and error, as a game is just a huge pile of undocumented assembly at first. In order to make a simple modification, it's generally necessary to play the game while examining the contents of RAM, locate a desired value through experimentation, use a debugger or a disassembler like IDA Pro to identify which parts of the code reference that value, then make small modifications until the desired behavior is achieved.
 
 An example of such a modification is removing a player's ability to lose lives upon dying. This can be achieved with the following procedure:
 
-1) Identify the memory address that is used to store a player's remaining lives.
-2) Locate the subroutine that handles player death.
-3) Modify this subroutine such that it does not decrement a player's remaining lives and continues with normal game execution.
+1. Identify the memory address that is used to store a player's remaining lives.
+2. Locate the subroutine that handles player death.
+3. Modify this subroutine such that it does not decrement a player's remaining lives and continues with normal game execution.
 
 In the case of SMB, the life counter is stored at `RAM:75A` and is referenced by decrement in the subroutine that begins at `ROM:11DD`.
 
@@ -63,6 +61,9 @@ The decrement instruction at `ROM:11E9` can be replaced by `NOP` instructions to
 
 ![no death subroutine](images/sub_nodeath.png)
 
+Taking this concept a few steps further, we also wanted to make it so the player doesn't take damage at all anymore. This would have been a painstakingly tedious and difficult process if not for the existence of a [RAM reference map](https://datacrystal.romhacking.net/wiki/Super_Mario_Bros.:RAM_map) for the game which explains what each byte of RAM represents. This allowed us to find the subroutines where Mario's size is reduced after colliding with an enemy, and from there to locate references to this routine. The removal of all one reference gave us the ability to walk through Goombas, but still resulted in death on collision with a Koopa. After removing all references to the injury routine, unintended but hilarious side-effects revealed themselves, with this end result:
+
+[![](http://img.youtube.com/vi/H5fuS086ks0/0.jpg)](http://www.youtube.com/watch?v=H5fuS086ks0 "Murder Machine Mario")
 
 
 ## Resources and References
